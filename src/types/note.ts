@@ -10,5 +10,5 @@ export interface Note {
 export interface NoteFormData {
   title: string;
   content: string;
-  tag: string;
+  tag: "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 }
