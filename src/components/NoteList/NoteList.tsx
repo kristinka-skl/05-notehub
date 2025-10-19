@@ -5,12 +5,11 @@ import { deleteNote } from "../../services/noteService";
 import toast from "react-hot-toast";
 interface NoteListProps {
   notes: Note[];
-  onClick: (id: string) => void;
 }
 export default function NoteList({ notes }: NoteListProps) {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (id: Note["id"]) => deleteNote(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -29,7 +28,7 @@ export default function NoteList({ notes }: NoteListProps) {
             <div className={css.footer}>
               <span className={css.tag}>{note.tag}</span>
               <button className={css.button} onClick={() => mutate(note.id)}>
-                {isPending ? "Deleting..." : "Delete"}
+                Delete
               </button>
             </div>
           </li>

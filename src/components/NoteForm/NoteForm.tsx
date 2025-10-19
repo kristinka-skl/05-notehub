@@ -18,15 +18,15 @@ const NoteFormSchema = Yup.object().shape({
     .max(50, "Title is too long")
     .required("Name is required"),
   content: Yup.string().max(500, "Note is too long"),
-  tag: Yup.mixed<"Todo" | "Work" | "Personal" | "Meeting" | "Shopping">()
+  tag: Yup.mixed()
     .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"])
     .required("Tag is required"),
 });
 
-interface FormProps {
+interface NoteFormProps {
   onClose: () => void;
 }
-export default function NoteForm({ onClose }: FormProps) {
+export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({

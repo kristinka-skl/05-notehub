@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import css from "./App.module.css";
 import NoteList from "../NoteList/NoteList";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { deleteNote, fetchNotes } from "../../services/noteService";
+import { fetchNotes } from "../../services/noteService";
 import { useDebouncedCallback } from "use-debounce";
 import SearchBox from "../SearchBox/SearchBox";
 import Pagination from "../Pagination/Pagination";
@@ -54,9 +54,7 @@ export default function App() {
         </header>
         {isLoading && <Loader />}
         <Toaster position="top-right" reverseOrder={false} />
-        {isSuccess && data.notes.length > 0 && (
-          <NoteList notes={data.notes} onClick={deleteNote} />
-        )}
+        {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes} />}
         {isModalOpen && (
           <Modal onClose={closeModal}>
             <NoteForm onClose={closeModal} />
